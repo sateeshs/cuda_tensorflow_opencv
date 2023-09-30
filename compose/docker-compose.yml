@@ -1,0 +1,19 @@
+version: "3.6"
+
+services:
+  tf-opencv-main:
+    build: .
+    volumes:
+      - .:/tf-opencv-main
+      - /local/directory:/container/mount
+    working_dir: /tf-opencv-main
+    ports:
+      - 8888:8888
+    # Setting up your GPU from here
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
